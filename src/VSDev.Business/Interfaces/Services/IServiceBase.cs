@@ -22,7 +22,7 @@ namespace VSDev.Business.Interfaces.Services
 
         Task Add(TEntity entity);
         Task Update(TEntity entity);
-        Task Remove(TEntity entity);
+        Task Remove(Guid id);
         Task RemoveInScale(List<TEntity> entities);
         Task<int> SaveChanges();
 

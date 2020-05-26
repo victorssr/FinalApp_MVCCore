@@ -1,7 +1,11 @@
-﻿namespace VSDev.Business.Models
+﻿using System;
+
+namespace VSDev.Business.Models
 {
     public class Curso : EntityBase
     {
+        public Guid ProfessorId { get; set; }
+
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public string ImagemCapa { get; set; }

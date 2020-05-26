@@ -53,9 +53,9 @@ namespace VSDev.Business.Services
             return _repositoryBase.Update(entity);
         }
 
-        public Task Remove(TEntity entity)
+        public Task Remove(Guid id)
         {
-            return _repositoryBase.Remove(entity);
+            return _repositoryBase.Remove(id);
         }
 
         public Task RemoveInScale(List<TEntity> entities)

@@ -1,7 +1,11 @@
-﻿namespace VSDev.Business.Models
+﻿using System;
+
+namespace VSDev.Business.Models
 {
     public class Endereco : EntityBase
     {
+        public Guid ProfessorId { get; set; }
+
         public string Logradouro { get; set; }
         public string Numero { get; set; }
         public string Complemento { get; set; }
