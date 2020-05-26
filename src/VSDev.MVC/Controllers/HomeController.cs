@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using VSDev.MVC.Models;
+using VSDev.MVC.ViewModels;
 
 namespace VSDev.MVC.Controllers
 {
@@ -28,10 +28,34 @@ namespace VSDev.MVC.Controllers
             return View();
         }
 
+        [Route("Error/{id:int}")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ErrorViewModel error = new ErrorViewModel();
+            error.StatusCode = id;
+
+            if (id == 500)
+            {
+                error.Titulo = "Ops! Ocorreu um problema";
+                error.Descricao = "Desculpe-nos o transtorno. Estamos trabalhando para corrigir o problema.";
+            }
+            else if (id == 404)
+            {
+                error.Titulo = "Ops! Página não encontrada";
+                error.Descricao = "A página que você busca não existe. Para dúvidas, entre em contato com o nosso suporte.";
+            }
+            else if (id == 403)
+            {
+                error.Titulo = "Ops! Acesso negado";
+                error.Descricao = "Você não possui permissão para prosseguir. Para dúvidas, entre em contato com o nosso suporte.";
+            }
+            else
+            {
+                return RedirectToAction(nameof(Error), 500);
+            }
+
+            return View(error);
         }
     }
 }
