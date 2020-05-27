@@ -1,6 +1,6 @@
 ﻿@model VSDev.MVC.ViewModels.ProfessorViewModel
 
-<h3>Cadastro de Professor</h3>
+<h3>Cadastro de Professor(a)</h3>
 <hr />
 <vc:Summary></vc:Summary>
 <div class="row">
@@ -42,8 +42,12 @@
                 <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <a class="btn btn-info" asp-action="Index">Voltar</a>
-                <input type="submit" value="Cadastrar Professor" class="btn btn-success" />
+                <a class="btn btn-info" asp-action="Index">
+                    <i class="fa fa-arrow-left mr-2"></i>Voltar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check mr-2"></i>Finalizar cadastro
+                </button>
             </div>
         </form>
     </div>

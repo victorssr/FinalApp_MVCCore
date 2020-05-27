@@ -94,8 +94,7 @@ namespace VSDev.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var professor = await _professorService.GetById(id);
-
+            var professor = await _professorService.FindAsNoTracking(id);
             if (professor == null) return NotFound();
 
             await _professorService.Remove(id);
