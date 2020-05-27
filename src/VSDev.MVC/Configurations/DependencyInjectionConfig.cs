@@ -2,8 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using VSDev.Business.Interfaces.Repositories;
 using VSDev.Business.Interfaces.Services;
+using VSDev.Business.Notifications;
 using VSDev.Business.Services;
-using VSDev.Infra.Context;
 using VSDev.Infra.Repositories;
 using VSDev.MVC.Extensions;
 
@@ -13,9 +13,9 @@ namespace VSDev.MVC.Configurations
     {
         public static IServiceCollection ResolveDepedencies(this IServiceCollection services)
         {
-            //services.AddScoped<ContextBase>();
-
             services.AddSingleton<IValidationAttributeAdapterProvider, DocumentoValidationAttributeAdapterProvider>();
+
+            services.AddScoped<INotificator, Notificator>();
 
             // REPOSITORIES
             services.AddScoped<ICursoRepository, CursoRepository>();

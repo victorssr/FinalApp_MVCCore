@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Localization;
 using System;
 using System.ComponentModel.DataAnnotations;
-using VSDev.Business.Models.Validations.Docs;
+using VSDev.Business.Models.Validations;
 
 namespace VSDev.MVC.Extensions
 {

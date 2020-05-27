@@ -1,6 +1,7 @@
 ﻿using VSDev.Business.Interfaces.Repositories;
 using VSDev.Business.Interfaces.Services;
 using VSDev.Business.Models;
+using VSDev.Business.Notifications;
 
 namespace VSDev.Business.Services
 {
@@ -8,7 +9,7 @@ namespace VSDev.Business.Services
     {
         private readonly IEnderecoRepository _enderecoRepository;
 
-        public EnderecoService(IEnderecoRepository enderecoRepository) : base(enderecoRepository)
+        public EnderecoService(IEnderecoRepository enderecoRepository, INotificator notificator) : base(enderecoRepository, notificator)
         {
             _enderecoRepository = enderecoRepository;
         }

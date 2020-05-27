@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VSDev.Business.Models.Validations.Docs
+namespace VSDev.Business.Models.Validations
 {
     public class CpfValidation
     {

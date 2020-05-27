@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using VSDev.Business.Interfaces.Services;
 using VSDev.Business.Models;
-using VSDev.MVC.Data;
+using VSDev.Business.Notifications;
 using VSDev.MVC.ViewModels;
 
 namespace VSDev.MVC.Controllers
 {
     [Authorize]
-    public class ProfessoresController : Controller
+    public class ProfessoresController : ControllerBase
     {
         private readonly IProfessorService _professorService;
         private readonly IMapper _mapper;
 
-        public ProfessoresController(IProfessorService professorService, IMapper mapper)
+        public ProfessoresController(IProfessorService professorService, IMapper mapper, INotificator notificator) : base(notificator)
         {
             _professorService = professorService;
             _mapper = mapper;
@@ -54,6 +51,8 @@ namespace VSDev.MVC.Controllers
             if (!ModelState.IsValid) return View(professorViewModel);
 
             await _professorService.Add(_mapper.Map<Professor>(professorViewModel));
+            
+            if (!OperacaoValida()) return View(professorViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -77,6 +76,8 @@ namespace VSDev.MVC.Controllers
 
             await _professorService.Update(_mapper.Map<Professor>(professorViewModel));
 
+            if (!OperacaoValida()) return View(professorViewModel);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -98,6 +99,8 @@ namespace VSDev.MVC.Controllers
             if (professor == null) return NotFound();
 
             await _professorService.Remove(id);
+
+            if (!OperacaoValida()) return View(_mapper.Map<ProfessorViewModel>(professor));
 
             return RedirectToAction(nameof(Index));
         }
