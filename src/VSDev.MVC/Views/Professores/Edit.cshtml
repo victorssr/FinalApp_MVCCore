@@ -1,18 +1,13 @@
 ﻿@model VSDev.MVC.ViewModels.ProfessorViewModel
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h1>Edit</h1>
-
-<h4>ProfessorViewModel</h4>
+<h3>Cadastro de Professor</h3>
 <hr />
+<vc:Summary></vc:Summary>
 <div class="row">
-    <vc:Summary></vc:Summary>
-
-    <div class="col-md-4">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
         <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
@@ -30,8 +25,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Genero" class="control-label"></label>
-                <select asp-for="Genero" class="form-control"></select>
-                <span asp-validation-for="Genero" class="text-danger"></span>
+                <div class="form-check">
+                    <input type="radio" value="0" asp-for="Genero" id="genero-feminino" checked="@(Model.Genero == 0)" />
+                    <label class="form-check-label" for="genero-feminino">Feminino</label>
+                    <input type="radio" value="1" asp-for="Genero" id="genero-masculino" checked="@(Model.Genero == 1)" />
+                    <label class="form-check-label" for="genero-masculino">Masculino</label>
+                    <br />
+                    <span asp-validation-for="Genero" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -43,18 +44,19 @@
                 <input asp-for="Celular" class="form-control" />
                 <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
+                <input type="submit" value="Atualizar Professor" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        jQuery(function ($) {
+            $("#Celular").mask("(99)99999-9999");
+        })
+    </script>
 }

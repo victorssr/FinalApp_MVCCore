@@ -11,6 +11,8 @@ namespace VSDev.MVC.Extensions
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            if (value == null) return new ValidationResult("Informe o documento");
+
             string documento = value.ToString();
 
             if (documento.Length <= 11)

@@ -26,7 +26,7 @@ namespace VSDev.MVC.ViewModels
 
         [DisplayName("Gênero")]
         [Required(ErrorMessage = "É necessário informar o {0}")]
-        public Genero? Genero { get; set; }
+        public int? Genero { get; set; }
 
         [DisplayName("E-mail")]
         [StringLength(50, ErrorMessage = "O {0} deve ter até {1} caracteres")]
