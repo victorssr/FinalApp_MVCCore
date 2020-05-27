@@ -4,7 +4,7 @@ using VSDev.Business.Models;
 
 namespace VSDev.Business.Services
 {
-    public class CursoService : ServiceBase<Curso>
+    public class CursoService : ServiceBase<Curso>, ICursoService
     {
         private readonly ICursoRepository _cursoRepository;
 

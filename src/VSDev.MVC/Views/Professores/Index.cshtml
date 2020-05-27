@@ -1,0 +1,68 @@
+﻿@model IEnumerable<VSDev.MVC.ViewModels.ProfessorViewModel>
+
+    <h2>Professores</h2>
+    <div class="mt-3">
+        <p>
+            <a class="btn btn-primary" asp-action="Create">
+                <span class="fa fa-plus mr-2"></span>Novo Professor
+            </a>
+        </p>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataNascimento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Celular)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataNascimento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Celular)
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                                <span class="fa fa-edit mr-2"></span>
+                                Editar
+                            </a>
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                                <span class="fa fa-search"></span>
+                                Detalhes
+                            </a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                <span class="fa fa-trash"></span>
+                                Excluir
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

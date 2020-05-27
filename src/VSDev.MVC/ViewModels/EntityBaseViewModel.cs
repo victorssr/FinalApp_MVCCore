@@ -11,10 +11,5 @@ namespace VSDev.MVC.ViewModels
         [ScaffoldColumn(false)]
         public DateTime DataCadastro { get; set; }
 
-        protected EntityBaseViewModel()
-        {
-            Id = Guid.NewGuid();
-        }
-
     }
 }

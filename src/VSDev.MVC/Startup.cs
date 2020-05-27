@@ -1,12 +1,16 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using VSDev.MVC.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
+using System.Globalization;
 using VSDev.Infra.Context;
+using VSDev.MVC.Configurations;
 
 namespace VSDev.MVC
 {
@@ -21,15 +25,17 @@ namespace VSDev.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentityConfiguration(Configuration);
 
             services.AddDbContext<ContextBase>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
 
-            services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddMvcConfigurations();
+
             services.AddRazorPages();
+            
+            services.ResolveDepedencies();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,6 +51,8 @@ namespace VSDev.MVC
                 app.UseStatusCodePagesWithRedirects("/Error/{0}");
                 app.UseHsts();
             }
+
+            app.UseLocalizationConfiguration();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

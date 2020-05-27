@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using VSDev.Business.Models;
 
 namespace VSDev.Infra.Context
 {
@@ -13,9 +12,9 @@ namespace VSDev.Infra.Context
         {
         }
 
-        public DbSet<Curso> Cursos { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<Professor> Professor { get; set; }
+        public DbSet<Business.Models.Curso> Cursos { get; set; }
+        public DbSet<Business.Models.Endereco> Enderecos { get; set; }
+        public DbSet<Business.Models.Professor> Professor { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

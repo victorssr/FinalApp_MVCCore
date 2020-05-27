@@ -9,30 +9,31 @@ namespace VSDev.MVC.ViewModels
     public class ProfessorViewModel : EntityBaseViewModel
     {
         [StringLength(300, ErrorMessage = "O {0} deve ter até {1} caracteres")]
-        [Required]
+        [Required(ErrorMessage = "É necessário informar o {0}")]
         public string Nome { get; set; }
 
         [DisplayName("Documento (CPF ou CNPJ)")]
         [StringLength(14, MinimumLength = 11, ErrorMessage = "O {0} deve ter {2} ou {1} caracteres")]
-        [Required]
+        [Required(ErrorMessage = "É necessário informar o {0}")]
         public string Documento { get; set; }
 
         [DisplayName("Data de nascimento")]
-        [Required]
+        [Required(ErrorMessage = "É necessário informar a {0}")]
+        [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
         [DisplayName("Gênero")]
-        [Required]
-        public Genero Genero { get; set; }
+        [Required(ErrorMessage = "É necessário informar o {0}")]
+        public Genero? Genero { get; set; }
 
         [DisplayName("E-mail")]
         [StringLength(50, ErrorMessage = "O {0} deve ter até {1} caracteres")]
-        [Required]
+        [EmailAddress(ErrorMessage = "Informe um e-mail válido")]
+        [Required(ErrorMessage = "É necessário informar o {0}")]
         public string Email { get; set; }
 
         [DisplayName("Número do celular")]
         [StringLength(14, MinimumLength = 14, ErrorMessage = "O {0} deve ter {1} caracteres")]
-        [Required]
         public string Celular { get; set; }
 
         // Relacionamento
