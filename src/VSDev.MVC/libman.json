@@ -25,10 +25,10 @@
       ]
     },
     {
-      "library": "jquery.mask@1.14.16",
-      "destination": "wwwroot/lib/jquery.mask/",
+      "library": "jquery.maskedinput@1.4.1",
+      "destination": "wwwroot/lib/jquery.maskedinput/",
       "files": [
-        "jquery.mask.min.js"
+        "jquery.maskedinput.min.js"
       ]
     }
   ]

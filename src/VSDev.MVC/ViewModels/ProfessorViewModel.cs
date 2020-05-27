@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using VSDev.Business.Models.Enumerations;
+using VSDev.MVC.Extensions;
 
 namespace VSDev.MVC.ViewModels
 {
@@ -13,6 +14,7 @@ namespace VSDev.MVC.ViewModels
         public string Nome { get; set; }
 
         [DisplayName("Documento (CPF ou CNPJ)")]
+        [Documento]
         [StringLength(14, MinimumLength = 11, ErrorMessage = "O {0} deve ter {2} ou {1} caracteres")]
         [Required(ErrorMessage = "É necessário informar o {0}")]
         public string Documento { get; set; }

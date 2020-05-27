@@ -3,7 +3,7 @@
 <h3>Cadastro de Professor</h3>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -43,19 +43,19 @@
                 <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
+                <input type="submit" value="Cadastrar Professor" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/lib/jquery.mask/jquery.mask.min.js"></script>
+    <script src="~/lib/jquery.maskedinput/jquery.maskedinput.min.js"></script>
     <script>
+        jQuery(function ($) {
+            $("#Celular").mask("(99)99999-9999");
+        })
     </script>
 }
