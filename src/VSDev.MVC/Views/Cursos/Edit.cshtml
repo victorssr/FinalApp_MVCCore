@@ -1,20 +1,23 @@
 ﻿@model VSDev.MVC.ViewModels.CursoViewModel
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h1>Edit</h1>
-
-<h4>CursoViewModel</h4>
+<h4>Edição de Curso - @Model.Titulo</h4>
 <hr />
+<vc:summary></vc:summary>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form enctype="multipart/form-data" asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
+                </label>
+            </div>
             <div class="form-group">
                 <label asp-for="ProfessorId" class="control-label"></label>
-                <select asp-for="ProfessorId" class="form-control" asp-items="ViewBag.ProfessorId"></select>
+                <select asp-for="ProfessorId" class="form-control" asp-items="@(new SelectList(Model.Professores, "Id", "Nome"))">
+                    <option value="">Selecione um professor</option>
+                </select>
                 <span asp-validation-for="ProfessorId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -24,41 +27,62 @@
             </div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <textarea rows="5" asp-for="Descricao" class="form-control"></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImagemCapa" class="control-label"></label>
-                <input asp-for="ImagemCapa" class="form-control" />
-                <span asp-validation-for="ImagemCapa" class="text-danger"></span>
+                <label asp-for="UploadCapa" class="control-label"></label>
+
+                <div class="custom-file">
+                    <input type="file" asp-for="UploadCapa" class="custom-file-input" />
+                    <label data-browse="Procurar" class="custom-file-label" for="UploadCapa"></label>
+                    <label id="img_capa" class="hidden"></label>
+                </div>
+
+                <span asp-validation-for="UploadCapa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" />
-                <span asp-validation-for="Valor" class="text-danger"></span>
+                <label class="control-label">Capa Atual</label><br />
+                <img src="~/imagens/curso/@Model.ImagemCapa" style="width: 200px; height: 200px" />
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
-                </label>
+            <div class="form-group">
+                <label asp-for="ValorCurrency" class="control-label"></label>
+                <input asp-for="ValorCurrency" class="form-control" value="@Model.Valor.ToString("C", new System.Globalization.CultureInfo("pt-BR"))" />
+                <span asp-validation-for="ValorCurrency" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DuracaoEmHoras" class="control-label"></label>
                 <input asp-for="DuracaoEmHoras" class="form-control" />
                 <span asp-validation-for="DuracaoEmHoras" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-info" asp-action="Index">
+                    <i class="fa fa-arrow-left mr-2"></i>Voltar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check mr-2"></i>Salvar alterações
+                </button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $("#ValorCurrency").maskMoney();
+
+        $("#UploadCapa").change(function () {
+            if (this.files.length == 0) {
+                $("#img_capa").text("");
+                $("#img_capa").addClass("hidden");
+            }
+            else {
+                $("#img_capa").text(this.files[0].name);
+                $("#img_capa").removeClass("hidden");
+            }
+        });
+    </script>
 }

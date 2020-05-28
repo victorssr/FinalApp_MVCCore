@@ -89,7 +89,21 @@ namespace VSDev.MVC.Controllers
         {
             if (id != cursoViewModel.Id) return NotFound();
 
+            var produtoBase = await ObterCursoProfessor(id);
+            if (produtoBase == null) return NotFound();
+
+            cursoViewModel.ImagemCapa = produtoBase.ImagemCapa;
+            cursoViewModel.Professores = produtoBase.Professores;
             if (!ModelState.IsValid) return View(cursoViewModel);
+
+            if (cursoViewModel.UploadCapa != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(cursoViewModel.UploadCapa.FileName);
+                if (!await UploadArquivo(cursoViewModel.UploadCapa, fileName, cursoViewModel.ImagemCapa)) return View(cursoViewModel);
+                cursoViewModel.ImagemCapa = fileName;
+            }
+
+            cursoViewModel.Valor = Decimal.Parse(ObterNumeroDecimal(cursoViewModel.ValorCurrency), new CultureInfo("pt-BR"));
 
             await _cursoService.Update(_mapper.Map<Curso>(cursoViewModel));
 
@@ -124,7 +138,9 @@ namespace VSDev.MVC.Controllers
 
         private async Task<CursoViewModel> ObterCursoProfessor(Guid id)
         {
-            return _mapper.Map<CursoViewModel>(await _cursoService.ObterCursoProfessor(id));
+            var cursoViewModel = _mapper.Map<CursoViewModel>(await _cursoService.ObterCursoProfessor(id));
+            cursoViewModel = await PopularProfessores(cursoViewModel);
+            return cursoViewModel;
         }
 
         private async Task<CursoViewModel> PopularProfessores(CursoViewModel cursoViewModel)
