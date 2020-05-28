@@ -4,68 +4,69 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
+<h2>Cursos cadastrados</h2>
+<p class="mt-3">
+    <a class="btn btn-primary" asp-action="Create">
+        <i class="fa fa-plus mr-2"></i>Novo Curso
+    </a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagemCapa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Valor)
-            </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.Ativo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DuracaoEmHoras)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Professor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.DuracaoEmHoras)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Valor)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagemCapa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DuracaoEmHoras)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Professor.Documento)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    <i class="fa @((item.Ativo) ? "fa-check text-success" : "fa-times text-danger")"></i>
+                </td>
+                <td>
+                    <img src="~/imagens/curso/@item.ImagemCapa" style="width: 100px; height: 100px;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Professor.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.DuracaoEmHoras)
+                </td>
+                <td class="text-center">
+                    @item.Valor.ToString("C", new System.Globalization.CultureInfo("pt-BR"))
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fa fa-edit mr-2"></i>Editar
+                    </a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa fa-search mr-2"></i>Detalhes
+                    </a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                        <i class="fa fa-trash mr-2"></i>Excluir
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
