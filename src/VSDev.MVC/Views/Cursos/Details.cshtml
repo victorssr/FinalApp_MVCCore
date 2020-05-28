@@ -4,57 +4,63 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>CursoViewModel</h4>
+    <h4>Detalhes @Model.Titulo</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagemCapa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagemCapa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ativo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ativo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DuracaoEmHoras)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DuracaoEmHoras)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Professor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Professor.Documento)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-4 text-center">
+            <img src="~/imagens/curso/@Model.ImagemCapa" style="width: 200px; height: 200px; " />
+        </div>
+        <div class="col-8">
+            <dl class="row">
+                <dt class="col-sm-12">
+                    Situação
+                </dt>
+                <dd class="col-sm-12">
+                    @((Model.Ativo) ? Html.Raw("<span class='text-success'><i class='fa fa-check mr-2'></i>Ativo</span>") : Html.Raw("<span class='text-danger'><i class='fa fa-times mr-2'></i>Inativo</span>"))
+                </dd>
+                <dt class="col-sm-12">
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </dt>
+                <dd class="col-sm-12">
+                    @Html.DisplayFor(model => model.Titulo)
+                </dd>
+                <dt class="col-sm-12">
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </dt>
+                <dd class="col-sm-12">
+                    @Html.DisplayFor(model => model.Descricao)
+                </dd>
+                <dt class="col-sm-12">
+                    @Html.DisplayNameFor(model => model.Valor)
+                </dt>
+                <dd class="col-sm-12">
+                    @Model.Valor.ToString("C")
+                </dd>
+                <dt class="col-sm-12">
+                    @Html.DisplayNameFor(model => model.DuracaoEmHoras)
+                </dt>
+                <dd class="col-sm-12">
+                    @Html.DisplayFor(model => model.DuracaoEmHoras)
+                </dd>
+                <dt class="col-sm-12">
+                    @Html.DisplayNameFor(model => model.Professor)
+                </dt>
+                <dd class="col-sm-12">
+                    @Html.DisplayFor(model => model.Professor.Nome)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-info" asp-action="Index">
+        <i class="fa fa-arrow-left mr-2"></i>
+        Voltar
+    </a>
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">
+        <i class="fa fa-edit mr-2"></i>
+        Editar Curso
+    </a>
 </div>
