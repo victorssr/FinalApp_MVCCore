@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using VSDev.Business.Models.Validations;
 
-namespace VSDev.MVC.Extensions
+namespace VSDev.MVC.Extensions.Attributes
 {
     public class DocumentoAttribute : ValidationAttribute
     {

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using VSDev.MVC.Extensions.Attributes;
 
 namespace VSDev.MVC.ViewModels
 {
@@ -21,11 +24,9 @@ namespace VSDev.MVC.ViewModels
         public string Descricao { get; set; }
 
         [DisplayName("Capa do Curso")]
-        [StringLength(100, ErrorMessage = "A {0} deve ter até {1} caracteres")]
-        [Required(ErrorMessage = "É necessário informar a {0}")]
         public string ImagemCapa { get; set; }
 
-        [Required(ErrorMessage = "É necessário informar o {0}")]
+        [ScaffoldColumn(false)]
         public decimal Valor { get; set; }
 
         [DisplayName("Ativo?")]
@@ -33,10 +34,23 @@ namespace VSDev.MVC.ViewModels
         public bool Ativo { get; set; }
 
         [DisplayName("Duração do curso (Em horas)")]
+        [Range(1, int.MaxValue, ErrorMessage = "É necessário informar a {0}")]
         [Required(ErrorMessage = "É necessário informar a {0}")]
-        public int DuracaoEmHoras { get; set; }
+        public int? DuracaoEmHoras { get; set; }
 
-        // Relacionamento
+        // RELACIONAMENTO
         public ProfessorViewModel Professor { get; set; }
+
+        // AUXILIAR
+
+        [DisplayName("Valor")]
+        [Decimal(AllowZero = true, Prefix = "R$")]
+        [Required(ErrorMessage = "É necessário informar o {0}")]
+        public string ValorCurrency { get; set; }
+
+        public IEnumerable<ProfessorViewModel> Professores { get; set; }
+
+        [DisplayName("Capa do Curso")]
+        public IFormFile UploadCapa { get; set; }
     }
 }

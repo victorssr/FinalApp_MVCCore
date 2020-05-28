@@ -5,7 +5,7 @@ using VSDev.Business.Interfaces.Services;
 using VSDev.Business.Notifications;
 using VSDev.Business.Services;
 using VSDev.Infra.Repositories;
-using VSDev.MVC.Extensions;
+using VSDev.MVC.Extensions.Attributes;
 
 namespace VSDev.MVC.Configurations
 {
@@ -14,6 +14,7 @@ namespace VSDev.MVC.Configurations
         public static IServiceCollection ResolveDepedencies(this IServiceCollection services)
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, DocumentoValidationAttributeAdapterProvider>();
+            services.AddSingleton<IValidationAttributeAdapterProvider, DecimalValidationAttributeAdapterProvider>();
 
             services.AddScoped<INotificator, Notificator>();
 

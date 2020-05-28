@@ -1,0 +1,88 @@
+﻿@model VSDev.MVC.ViewModels.CursoViewModel
+
+
+<h4>Cadastro de Curso</h4>
+<hr />
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProfessorId" class="control-label"></label>
+                <select asp-for="ProfessorId" class="form-control" asp-items="@(new SelectList(Model.Professores, "Id", "Nome"))">
+                    <option value="">Selecione um professor</option>
+                </select>
+                <span asp-validation-for="ProfessorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <textarea rows="5" asp-for="Descricao" class="form-control"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadCapa" class="control-label"></label>
+
+                <div class="custom-file">
+                    <input type="file" asp-for="UploadCapa" class="custom-file-input" />
+                    <label data-browse="Procurar" class="custom-file-label" for="UploadCapa"></label>
+                    <label class="hidden" id="img_capa"></label>
+                </div>
+
+                <span asp-validation-for="UploadCapa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorCurrency" class="control-label"></label>
+                <input asp-for="ValorCurrency" class="form-control" />
+                <span asp-validation-for="ValorCurrency" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="DuracaoEmHoras" class="control-label"></label>
+                <input asp-for="DuracaoEmHoras" class="form-control" />
+                <span asp-validation-for="DuracaoEmHoras" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-info" asp-action="Index">
+                    <i class="fa fa-arrow-left mr-2"></i>Voltar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check mr-2"></i>Finalizar cadastro
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $("#ValorCurrency").maskMoney();
+
+        $("#UploadCapa").change(function () {
+            if (this.files.length == 0) {
+                $("#img_capa").text("");
+                $("#img_capa").addClass("hidden");
+            }
+            else {
+                $("#img_capa").text(this.files[0].name);
+                $("#img_capa").removeClass("hidden");
+            }
+        });
+
+        $("#UploadCapa").attr("data-val", "true");
+        $("#UploadCapa").attr("data-val-required", "Selecione uma imagem de capa para o curso");
+    </script>
+}

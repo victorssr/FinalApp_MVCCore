@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using VSDev.Business.Models.Enumerations;
-using VSDev.MVC.Extensions;
+using VSDev.MVC.Extensions.Attributes;
 
 namespace VSDev.MVC.ViewModels
 {

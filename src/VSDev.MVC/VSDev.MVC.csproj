@@ -22,4 +22,8 @@
     <ProjectReference Include="..\VSDev.Infra\VSDev.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imagens\curso\" />
+  </ItemGroup>
+
 </Project>

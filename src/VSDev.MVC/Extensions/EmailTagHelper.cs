@@ -5,7 +5,7 @@ namespace VSDev.MVC.Extensions
 {
     public class EmailTagHelper : TagHelper
     {
-        public string Domain { get; set; } = "@hotmail.com";
+        public string Domain { get; set; } = "hotmail.com";
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {

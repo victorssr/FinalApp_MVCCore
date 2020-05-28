@@ -30,6 +30,19 @@
       "files": [
         "jquery.maskedinput.min.js"
       ]
+    },
+    {
+      "library": "jquery-validate@1.19.1",
+      "destination": "wwwroot/lib/jquery-validate/",
+      "files": [
+        "jquery.validate.min.js",
+        "additional-methods.min.js",
+        "localization/messages_pt_BR.min.js"
+      ]
+    },
+    {
+      "library": "jquery-maskmoney@3.0.2",
+      "destination": "wwwroot/lib/jquery-maskmoney/"
     }
   ]
 }

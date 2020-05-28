@@ -13,6 +13,5 @@ namespace VSDev.MVC.Data
             : base(options)
         {
         }
-        public DbSet<VSDev.MVC.ViewModels.ProfessorViewModel> ProfessorViewModel { get; set; }
     }
 }
