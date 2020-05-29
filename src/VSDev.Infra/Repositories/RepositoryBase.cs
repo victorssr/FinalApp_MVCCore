@@ -71,11 +71,12 @@ namespace VSDev.Infra.Repositories
 
         public async Task RemoveInScale(List<TEntity> entities)
         {
+            if (entities.Count() == 0) return;
+
             entities.ForEach(e =>
             {
                 _dbSet.Remove(new TEntity { Id = e.Id });
             });
-
             await SaveChanges();
         }
 

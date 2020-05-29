@@ -26,5 +26,10 @@ namespace VSDev.Business.Services
         {
             return await _cursoRepository.ObterCursoProfessor(id);
         }
+
+        public async Task<IEnumerable<Curso>> BuscarCursosProfessor(Guid professorId)
+        {
+            return await _cursoRepository.BuscarCursosProfessor(professorId);
+        }
     }
 }

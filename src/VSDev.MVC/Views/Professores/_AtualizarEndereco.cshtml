@@ -1,0 +1,27 @@
+﻿@model VSDev.MVC.ViewModels.ProfessorViewModel
+
+<div class="modal-header">
+    <h3 class="modal-title">Atualizar Endereço</h3>
+</div>
+
+<form asp-action="AtualizarEndereco">
+    <div class="modal-body">
+        @Html.HiddenFor(m => m.Endereco.ProfessorId)
+        @Html.HiddenFor(m => m.Endereco.Id)
+
+        <partial name="_Endereco" />
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" data-dismiss="modal">
+            <i class="fa fa-arrow-left mr-2"></i> Cancelar
+        </button>
+        <button type="submit" class="btn btn-success">
+            <i class="fa fa-check mr-2"></i> Salvar alterações
+        </button>
+    </div>
+</form>
+
+<script>
+    BuscaCep();
+</script>

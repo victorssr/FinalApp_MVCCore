@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using VSDev.Business.Models.Enumerations;
 using VSDev.MVC.Extensions.Attributes;
 

@@ -52,13 +52,35 @@
                     <i class="fa fa-check mr-2"></i>Salvar alterações
                 </button>
             </div>
+
         </form>
+    </div>
+    <div class="col-12">
+        <hr />
+        <h4 class="mb-3">Endereço</h4>
+
+        <div id="targetEndereco">
+            <partial name="_DetalhesEndereco" />
+        </div>
+    </div>
+</div>
+
+<div id="modalEndereco" class="modal fade">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div id="modalEnderecoContent"></div>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
     <script>
+        $(document).ready(function () {
+            AjaxModal();
+        })
+
         jQuery(function ($) {
             $("#Celular").mask("(99)99999-9999");
         })

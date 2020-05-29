@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using VSDev.MVC.Extensions.Attributes;
 
 namespace VSDev.MVC.ViewModels
@@ -48,9 +49,12 @@ namespace VSDev.MVC.ViewModels
         [Required(ErrorMessage = "É necessário informar o {0}")]
         public string ValorCurrency { get; set; }
 
+        [NotMapped]
         public IEnumerable<ProfessorViewModel> Professores { get; set; }
 
         [DisplayName("Capa do Curso")]
+        [ScaffoldColumn(false)]
+        [NotMapped]
         public IFormFile UploadCapa { get; set; }
     }
 }

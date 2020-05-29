@@ -9,5 +9,6 @@ namespace VSDev.Business.Interfaces.Services
     {
         Task<IEnumerable<Curso>> ListarProfessores();
         Task<Curso> ObterCursoProfessor(Guid id);
+        Task<IEnumerable<Curso>> BuscarCursosProfessor(Guid professorId);
     }
 }

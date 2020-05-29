@@ -13,6 +13,7 @@ namespace VSDev.Infra.Repositories
     {
         public CursoRepository(ContextBase contextBase) : base(contextBase) { }
 
+
         public async Task<IEnumerable<Curso>> ListarProfessores()
         {
             return await _contextBase.Cursos.AsNoTracking().Include(c => c.Professor).ToListAsync();
@@ -22,6 +23,12 @@ namespace VSDev.Infra.Repositories
         {
             return await _contextBase.Cursos.AsNoTracking()
                 .Include(c => c.Professor).FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<IEnumerable<Curso>> BuscarCursosProfessor(Guid professorId)
+        {
+            return await _contextBase.Cursos.AsNoTracking()
+                            .Where(c => c.ProfessorId == professorId).ToListAsync();
         }
     }
 }
