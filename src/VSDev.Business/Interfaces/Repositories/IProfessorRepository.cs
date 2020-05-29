@@ -8,5 +8,6 @@ namespace VSDev.Business.Interfaces.Repositories
     public interface IProfessorRepository : IRepositoryBase<Professor>
     {
         Task<Professor> ObterProfessorEndereco(Guid id);
+        Task<Professor> ObterProfessorEnderecoCursos(Guid id);
     }
 }

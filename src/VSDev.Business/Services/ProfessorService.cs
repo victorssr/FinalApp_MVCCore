@@ -67,5 +67,10 @@ namespace VSDev.Business.Services
         {
             return await _professorRepository.ObterProfessorEndereco(id);
         }
+
+        public async Task<Professor> ObterProfessorEnderecoCursos(Guid id)
+        {
+            return await _professorRepository.ObterProfessorEnderecoCursos(id);
+        }
     }
 }

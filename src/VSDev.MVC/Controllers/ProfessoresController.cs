@@ -64,7 +64,7 @@ namespace VSDev.MVC.Controllers
 
         public async Task<IActionResult> Edit(Guid id)
         {
-            var professorViewModel = await ObterProfessorEndereco(id);
+            var professorViewModel = await ObterProfessorEnderecoCursos(id);
 
             if (professorViewModel == null) return NotFound();
 
@@ -151,5 +151,12 @@ namespace VSDev.MVC.Controllers
             var professorViewModel = _mapper.Map<ProfessorViewModel>(await _professorService.ObterProfessorEndereco(id));
             return professorViewModel;
         }
+
+
+        private async Task<ProfessorViewModel> ObterProfessorEnderecoCursos(Guid id)
+        {
+            return _mapper.Map<ProfessorViewModel>(await _professorService.ObterProfessorEnderecoCursos(id));
+        }
+
     }
 }

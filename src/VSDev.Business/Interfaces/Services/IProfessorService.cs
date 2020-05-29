@@ -8,5 +8,6 @@ namespace VSDev.Business.Interfaces.Services
     public interface IProfessorService : IServiceBase<Professor>
     {
         Task<Professor> ObterProfessorEndereco(Guid id);
+        Task<Professor> ObterProfessorEnderecoCursos(Guid id);
     }
 }

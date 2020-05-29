@@ -1,0 +1,55 @@
+﻿@model IEnumerable<VSDev.MVC.ViewModels.CursoViewModel>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Professor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    <i class="fa @((item.Ativo) ? "fa-check text-success" : "fa-times text-danger")"></i>
+                </td>
+                <td>
+                    <img src="~/imagens/curso/@item.ImagemCapa" style="width: 100px; height: 100px;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Professor.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td class="text-center">
+                    @item.Valor.ToString("C", new System.Globalization.CultureInfo("pt-BR"))
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" asp-controller="Cursos" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fa fa-edit mr-2"></i>Editar
+                    </a>
+                    <a class="btn btn-info" asp-controller="Cursos" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa fa-search mr-2"></i>Detalhes
+                    </a>
+                    <a class="btn btn-danger" asp-controller="Cursos" asp-action="Delete" asp-route-id="@item.Id">
+                        <i class="fa fa-trash mr-2"></i>Excluir
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

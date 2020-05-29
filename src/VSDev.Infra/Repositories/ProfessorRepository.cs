@@ -16,8 +16,15 @@ namespace VSDev.Infra.Repositories
         public async Task<Professor> ObterProfessorEndereco(Guid id)
         {
             return await _contextBase.Professores.AsNoTracking()
-                    .Include(p => p.Endereco).Where(p => p.Id == id)
-                    .FirstOrDefaultAsync();
+                    .Include(p => p.Endereco).FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<Professor> ObterProfessorEnderecoCursos(Guid id)
+        {
+            return await _contextBase.Professores.AsNoTracking()
+                    .Include(p => p.Endereco)
+                    .Include(p => p.Cursos)
+                    .FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }
