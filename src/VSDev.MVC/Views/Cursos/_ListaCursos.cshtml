@@ -39,13 +39,13 @@
                     @item.Valor.ToString("C", new System.Globalization.CultureInfo("pt-BR"))
                 </td>
                 <td class="text-right">
-                    <a class="btn btn-warning" asp-controller="Cursos" asp-action="Edit" asp-route-id="@item.Id">
+                    <a class="btn btn-warning" asp-controller="Cursos" asp-action="Edit" asp-route-id="@item.Id" disable-by-claim-name="Curso" disable-by-claim-value="Editar">
                         <i class="fa fa-edit mr-2"></i>Editar
                     </a>
                     <a class="btn btn-info" asp-controller="Cursos" asp-action="Details" asp-route-id="@item.Id">
                         <i class="fa fa-search mr-2"></i>Detalhes
                     </a>
-                    <a class="btn btn-danger" asp-controller="Cursos" asp-action="Delete" asp-route-id="@item.Id">
+                    <a class="btn btn-danger" asp-controller="Cursos" asp-action="Delete" asp-route-id="@item.Id" disable-by-claim-name="Curso" disable-by-claim-value="Excluir">
                         <i class="fa fa-trash mr-2"></i>Excluir
                     </a>
                 </td>
