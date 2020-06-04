@@ -5,7 +5,7 @@
 }
 
 <h2>Cursos cadastrados</h2>
-<p class="mt-3">
+<p class="mt-3" supress-by-claim-name="Curso" supress-by-claim-value="Adicionar">
     <a class="btn btn-primary" asp-action="Create">
         <i class="fa fa-plus mr-2"></i>Novo Curso
     </a>
@@ -50,13 +50,13 @@
                     @item.Valor.ToString("C", new System.Globalization.CultureInfo("pt-BR"))
                 </td>
                 <td class="text-right">
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id" supress-by-claim-name="Curso" supress-by-claim-value="Editar">
                         <i class="fa fa-edit mr-2"></i>Editar
                     </a>
                     <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
                         <i class="fa fa-search mr-2"></i>Detalhes
                     </a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" supress-by-claim-name="Curso" supress-by-claim-value="Excluir">
                         <i class="fa fa-trash mr-2"></i>Excluir
                     </a>
                 </td>
