@@ -51,7 +51,8 @@
                 @Html.DisplayFor(modelItem => Model.Endereco.Cep)
             </td>
             <td>
-                <a class="btn btn-warning" supress-by-action="Edit" asp-action="AtualizarEndereco" asp-route-id="@Model.Id" data-modal="" >
+                <a class="btn btn-warning" data-modal="" asp-action="AtualizarEndereco" asp-route-id="@Model.Id"
+                   supress-by-action="Edit">
                     <i class="fa fa-edit"></i> Editar
                 </a>
             </td>
