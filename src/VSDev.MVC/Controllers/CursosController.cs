@@ -8,12 +8,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using VSDev.Business.Interfaces.Services;
 using VSDev.Business.Models;
 using VSDev.Business.Notifications;
+using VSDev.MVC.Extensions;
 using VSDev.MVC.ViewModels;
 
 namespace VSDev.MVC.Controllers
@@ -50,11 +49,13 @@ namespace VSDev.MVC.Controllers
             return View(cursoViewModel);
         }
 
+        [ClaimsAuthorize("Curso", "Adicionar")]
         public async Task<IActionResult> Create()
         {
             return View(await PopularProfessores(new CursoViewModel()));
         }
 
+        [ClaimsAuthorize("Curso", "Adicionar")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CursoViewModel cursoViewModel)
@@ -74,6 +75,7 @@ namespace VSDev.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Curso", "Editar")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var cursoViewModel = await ObterCursoProfessor(id);
@@ -83,6 +85,7 @@ namespace VSDev.MVC.Controllers
             return View(cursoViewModel);
         }
 
+        [ClaimsAuthorize("Curso", "Editar")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, CursoViewModel cursoViewModel)
@@ -112,6 +115,7 @@ namespace VSDev.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Curso", "Excluir")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var cursoViewModel = await ObterCursoProfessor(id);
@@ -121,6 +125,7 @@ namespace VSDev.MVC.Controllers
             return View(cursoViewModel);
         }
 
+        [ClaimsAuthorize("Curso", "Excluir")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -135,6 +140,7 @@ namespace VSDev.MVC.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
 
         private async Task<CursoViewModel> ObterCursoProfessor(Guid id)
         {

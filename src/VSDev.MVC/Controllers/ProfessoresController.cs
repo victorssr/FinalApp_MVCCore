@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using VSDev.Business.Interfaces.Services;
 using VSDev.Business.Models;
 using VSDev.Business.Notifications;
+using VSDev.MVC.Extensions;
 using VSDev.MVC.ViewModels;
 
 namespace VSDev.MVC.Controllers
@@ -44,11 +45,13 @@ namespace VSDev.MVC.Controllers
             return View(professorViewModel);
         }
 
+        [ClaimsAuthorize("Professor", "Adicionar")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [ClaimsAuthorize("Professor", "Adicionar")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProfessorViewModel professorViewModel)
@@ -62,6 +65,7 @@ namespace VSDev.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Professor", "Editar")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var professorViewModel = await ObterProfessorEnderecoCursos(id);
@@ -71,6 +75,7 @@ namespace VSDev.MVC.Controllers
             return View(professorViewModel);
         }
 
+        [ClaimsAuthorize("Professor", "Editar")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProfessorViewModel professorViewModel)
@@ -86,6 +91,7 @@ namespace VSDev.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Professor", "Excluir")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var professorViewModel = await ObterProfessorEndereco(id);
@@ -95,6 +101,7 @@ namespace VSDev.MVC.Controllers
             return View(professorViewModel);
         }
 
+        [ClaimsAuthorize("Professor", "Excluir")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -109,6 +116,7 @@ namespace VSDev.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Professor", "Editar")]
         public async Task<IActionResult> AtualizarEndereco(Guid id)
         {
             var professorViewModel = await ObterProfessorEndereco(id);
@@ -118,6 +126,7 @@ namespace VSDev.MVC.Controllers
             return PartialView("_AtualizarEndereco", new ProfessorViewModel { Endereco = professorViewModel.Endereco });
         }
 
+        [ClaimsAuthorize("Professor", "Editar")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AtualizarEndereco(ProfessorViewModel professorViewModel)
@@ -137,6 +146,7 @@ namespace VSDev.MVC.Controllers
             return Json(new { success = true, url });
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> ObterEndereco(Guid id)
         {
             var professorViewModel = await ObterProfessorEndereco(id);
@@ -146,12 +156,12 @@ namespace VSDev.MVC.Controllers
             return PartialView("_DetalhesEndereco", professorViewModel);
         }
 
+
         private async Task<ProfessorViewModel> ObterProfessorEndereco(Guid id)
         {
             var professorViewModel = _mapper.Map<ProfessorViewModel>(await _professorService.ObterProfessorEndereco(id));
             return professorViewModel;
         }
-
 
         private async Task<ProfessorViewModel> ObterProfessorEnderecoCursos(Guid id)
         {
